@@ -1,0 +1,1631 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LH Store - Food & Drinks</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@100..700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 190px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Kantumruy Pro", sans-serif;
+      }
+
+      body {
+        background: #f7f8fa;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .sticky-header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      header {
+        height: 40px;
+        padding: 0 115px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        background: white;
+        color: #68758a;
+        font-size: 14px;
+      }
+
+      .lang-dropdown {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+
+      .lang-btn:hover {
+        background: #f0f0f0;
+      }
+
+      .lang-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        min-width: 120px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 6px;
+        display: none;
+        flex-direction: column;
+        z-index: 1001;
+        overflow: hidden;
+        border: 1px solid #eee;
+      }
+
+      .lang-dropdown:hover .lang-menu {
+        display: flex;
+      }
+
+      .lang-item {
+        padding: 8px 14px;
+        color: #333;
+        text-decoration: none;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.2s ease;
+      }
+
+      .lang-item:hover {
+        background: #fde8e8;
+        color: #d71920;
+      }
+
+      .section1 {
+        height: 80px;
+        padding: 0 115px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .logo img {
+        width: 80px;
+      }
+
+      .search {
+        display: flex;
+        width: 100%;
+        max-width: 680px;
+        height: 42px;
+        border: 1px solid #c2c2c2;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #f5f6fa;
+      }
+
+      .search input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0 18px;
+        background: transparent;
+      }
+
+      .search i {
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #d71920;
+        color: white;
+        cursor: pointer;
+      }
+
+      .right-s1 {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .icons {
+        display: flex;
+        gap: 20px;
+        font-size: 20px;
+      }
+
+      .money p:first-child {
+        font-size: 12px;
+        color: #777;
+      }
+
+      .money p:last-child {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      nav {
+        height: 45px;
+        background: #d71920;
+        padding: 0 115px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: white;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+      }
+
+      nav a.active {
+        background: white;
+        color: #d71920 !important;
+        font-weight: bold;
+      }
+
+      .category-banner {
+        background: #d71920;
+        color: white;
+        padding: 40px 115px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .category-icon {
+        width: 65px;
+        height: 65px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        flex-shrink: 0;
+      }
+
+      .category-title h1 {
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .category-title p {
+        font-size: 14px;
+        opacity: 0.9;
+        margin-top: 4px;
+      }
+
+      .container {
+        padding: 30px 115px;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 30px;
+      }
+
+      .filter-sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        position: sticky;
+        top: 185px;
+        height: fit-content;
+      }
+
+      .filter-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+      }
+
+      .filter-group {
+        margin-bottom: 25px;
+      }
+
+      .filter-item {
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-bottom: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .filter-item a {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        color: #555;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .filter-item:hover {
+        background: #f8f9fa;
+      }
+
+      .filter-item:hover a {
+        color: #d71920;
+      }
+
+      .filter-item.active {
+        background: #fde8e8;
+      }
+
+      .filter-item.active a {
+        color: #d71920 !important;
+        font-weight: bold;
+      }
+
+      .products-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .showing-text {
+        color: #666;
+        font-size: 15px;
+      }
+
+      .view-options {
+        display: flex;
+        gap: 8px;
+      }
+
+      .view-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .view-btn.active {
+        background: #d71920;
+        color: white;
+        border-color: #d71920;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .product-card {
+        background: rgb(227, 227, 227);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .product-card:hover {
+        transform: translateY(-6px) !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .product-img {
+        width: 100%;
+        height: 200px;
+        background: #f0f3f6;
+        overflow: hidden;
+      }
+
+      .product-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+
+      .product-card:hover .product-img img {
+        transform: scale(1.08);
+      }
+
+      .product-info {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .product-category {
+        font-size: 12px;
+        color: #888;
+      }
+
+      .product-name {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 4px;
+        color: #222;
+        line-height: 1.4;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: #e6a23c;
+        margin: 8px 0;
+      }
+
+      .rating span {
+        color: #888;
+      }
+
+      .card-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+      }
+
+      .price {
+        color: #d71920;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .price span {
+        color: #777;
+        font-size: 12px;
+        font-weight: normal;
+      }
+
+      .card-icons {
+        display: flex;
+        gap: 6px;
+      }
+
+      .card-icons i {
+        width: 32px;
+        height: 32px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #555;
+        font-size: 13px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+
+      .card-icons i:hover {
+        background: #d71920;
+        color: white;
+      }
+
+      footer {
+        background: #101827;
+        color: white;
+        margin-top: 50px;
+      }
+
+      .newsletter {
+        padding: 35px 115px;
+        border-bottom: 1px solid #293241;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .newsletter h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .newsletter p {
+        color: #b8c2d3;
+      }
+
+      .subscribe {
+        display: flex;
+        gap: 10px;
+      }
+
+      .subscribe input {
+        width: 350px;
+        height: 48px;
+        padding: 0 18px;
+        border-radius: 12px;
+        border: 1px solid #596273;
+        background: #273142;
+        color: white;
+        outline: none;
+      }
+
+      .subscribe button {
+        background: #ff7a00;
+        color: white;
+        border: none;
+        padding: 0 30px;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .footer-main {
+        padding: 55px 115px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+        gap: 50px;
+      }
+
+      .footer-logo img {
+        width: 200px;
+      }
+
+      .footer-logo p {
+        margin-top: 25px;
+        color: #b8c2d3;
+        line-height: 1.6;
+      }
+
+      .footer-col h3 {
+        margin-bottom: 25px;
+      }
+
+      .footer-col p {
+        color: #b8c2d3;
+        margin: 15px 0;
+        cursor: pointer;
+      }
+
+      .contact i {
+        color: #ff7a00;
+        margin-right: 12px;
+      }
+
+      .social {
+        display: flex;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .social i {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #273142;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      /* MEDIA QUERIES FOR RESPONSIVENESS */
+      @media (max-width: 1200px) {
+        header, .section1, nav, .category-banner, .container, .newsletter, .footer-main {
+          padding-left: 40px;
+          padding-right: 40px;
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          grid-template-columns: 1fr;
+          padding: 20px;
+        }
+
+        .filter-sidebar {
+          position: relative;
+          top: 0;
+        }
+
+        .newsletter,
+        .footer-main {
+          padding: 30px 20px;
+        }
+
+        .newsletter {
+          flex-direction: column;
+          gap: 20px;
+          align-items: flex-start;
+        }
+
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        header, .section1, nav, .category-banner, .container, .newsletter, .footer-main {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+
+        header {
+          font-size: 12px;
+        }
+
+        .section1 {
+          flex-direction: column;
+          height: auto;
+          padding-top: 15px;
+          padding-bottom: 15px;
+          gap: 15px;
+        }
+
+        .search {
+          width: 100%;
+        }
+
+        .right-s1 {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .subscribe {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .subscribe input {
+          width: 100%;
+        }
+
+        .subscribe button {
+          height: 48px;
+          width: 100%;
+        }
+
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .category-banner {
+          flex-direction: column;
+          text-align: center;
+          padding: 25px 15px;
+        }
+
+        .category-title h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sticky-header-wrapper">
+      <header>
+        <div>
+          <i class="bi bi-telephone"></i>
+          +855 99 456 459
+        </div>
+        <div class="lang-dropdown">
+          <div class="lang-btn">
+            <span>US English</span>
+            <i class="bi bi-chevron-down"></i>
+          </div>
+          <div class="lang-menu">
+            <a href="Food_drink.html" class="lang-item">US English</a>
+            <a href="Food_drink_kh.html" class="lang-item">KH Khmer</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="section1">
+        <div class="logo">
+          <img src="Logo.png" alt="Logo" />
+        </div>
+
+        <div class="search">
+          <input placeholder="Search for items..." />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="right-s1">
+          <div class="icons">
+            <i class="bi bi-heart"></i>
+            <i class="bi bi-person"></i>
+            <i class="bi bi-cart3"></i>
+          </div>
+          <div class="money">
+            <p>My cart</p>
+            <p>$0.00</p>
+          </div>
+        </div>
+      </section>
+
+      <nav>
+        <a href="health.html">Health & Beauty</a>
+        <a href="Fashion.html">Men's Fashion</a>
+        <a href="kictchen.html">Home & Kitchen</a>
+        <a href="Food_drink.html" class="active">Food and Drinks</a>
+        <a href="Contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="category-banner">
+      <div class="category-icon">
+        <i class="bi bi-fork-knife"></i>
+      </div>
+      <div class="category-title">
+        <h1>Food and Drinks</h1>
+        <p>74 Products</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <aside class="filter-sidebar" data-aos="zoom-in-up">
+        <div class="filter-title"><i class="bi bi-sliders"></i> Filter By</div>
+
+        <div class="filter-group">
+          <div class="filter-item active">
+            <a href="#alcohol">Alcohol</a>
+          </div>
+          <div class="filter-item">
+            <a href="#food">Food</a>
+          </div>
+          <div class="filter-item">
+            <a href="#coffee">Coffee</a>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-item">
+            <a style="color: #000000;" href="index.html">Go to Homepage</a>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="products-header" data-aos="zoom-in-up">
+          <div class="showing-text">
+            Showing <strong>24</strong> of <strong>74</strong> Products
+          </div>
+          <div class="view-options">
+            <button class="view-btn active">
+              <i class="bi bi-grid-fill"></i>
+            </button>
+            <button class="view-btn"><i class="bi bi-list-ul"></i></button>
+          </div>
+        </div>
+
+        <div class="product-grid">
+
+          <!-- Product 1 -->
+          <div class="product-card" id="alcohol" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779440864305-13.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Champagne brut 375ml</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.9</strong> <span>(12)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$35.00 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779440765429-12.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Amancaya 2021</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.8</strong> <span>(15)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$42.00 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779440686701-11.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Les Legendes Bordeaux 2020</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.6</strong> <span>(8)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$30.80 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779440470610-10.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Chateau villa bel air 2016</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(20)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$40.60 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779440394019-9.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Atan D'Aussieres 2020</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.7</strong> <span>(9)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$35.00 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779439776705-8.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Aussieres Rose 2022</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.5</strong> <span>(6)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$25.90 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779439674963-7.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Aussieres chardonnay 2022</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.8</strong> <span>(11)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$25.90 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779439599563-6.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Alcohol</div>
+              <div class="product-name">Aussieres Rouge 2021</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.4</strong> <span>(5)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$25.90 <span>/ bottle</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 9 -->
+          <div class="product-card" id="food" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779343808475-spicy%20beef.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Spicy Beef Jerky 50g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.8</strong> <span>(10)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$4.20 <span>/ can</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 10 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779343782822-beef.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Original Beef Jerky 50g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(1)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$4.20 <span>/ can</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 11 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779343968624-spicy%20chicken.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Spicy Chicken Jerky 75g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(1)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$4.20 <span>/ can</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 12 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1779343867185-chicken1.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Original Chicken Jerky 75g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(1)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$4.20 <span>/ can</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 13 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777972247623-Cashew%20nut%20500g.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cashew nut 500g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.9</strong> <span>(16)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$7.00 <span>/ Package</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 14 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777970699438-cookie-coffee-bottle.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian coffee cookie 150g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.6</strong> <span>(7)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$2.50 <span>/ can</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 15 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777970699438-cookie-coffee-bottle.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian coconut cookie 150g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.7</strong> <span>(9)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$2.50 <span>/ can</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 16 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777971173259-coconut-cookie-bottle.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian sesame cookie 150g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.5</strong> <span>(5)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$2.50 <span>/ can</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 17 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777967209618-cookie-coconut.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian dried coconut cookie 150g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.8</strong> <span>(12)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$3.00 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 18 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777967045937-cookie-cashew.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian cashew nut cookie 150g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.6</strong> <span>(8)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$3.00 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 19 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777966302256-cashew%20nut.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian cashew nut 200g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.9</strong> <span>(15)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$4.50 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 20 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777966458036-dried%20pine.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian dried pineapple 200g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.7</strong> <span>(10)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$4.50 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 21 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777963454465-dried%20coconut.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian dried coconut 100g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.5</strong> <span>(6)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$3.00 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 22 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777966609779-dried%20mango.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian dried mango 500g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(18)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$5.50 <span>/ Package</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 23 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1777962550036-dired%20mango%20svay%20angkor-1.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">Cambodian dried mango 200g</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.4</strong> <span>(5)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$3.00 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 24 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774943298516-C4.jpg" alt="Product" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Food</div>
+              <div class="product-name">SOVANN CAPSULE COFFEE (ROBUSTA)</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.9</strong> <span>(14)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$7.50 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 25 -->
+          <div class="product-card" id="coffee" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774942591293-SV4.jpg" alt="SOVANN SPECIALTY DRIP COFFEE" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">SOVANN SPECIALTY DRIP COFFEE</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$7.00 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 26 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774942445550-Pr-Ro1.jpg" alt="ROBUSTA DRIP COFFEE" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">ROBUSTA DRIP COFFEE</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$4.50 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 27 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774942231029-DSC08986.jpg" alt="ARABICA DRIP COFFEE" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">ARABICA DRIP COFFEE</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$7.00 <span>/ Box</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 28 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774941946600-DSC08939.jpg" alt="កេសរ KESOR" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">កេសរ KESOR</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$14.00 <span>/ Package</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 29 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774941779326-DSC08947.jpg" alt="ចន្ទន៍ CHAN" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">ចន្ទន៍ CHAN</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$9.50 <span>/ Package</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 30 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774941342082-DSC08954.jpg" alt="ខ្លឹម KHLOEM" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">ខ្លឹម KHLOEM</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$7.50 <span>/ Package</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 31 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774940994635-DSC08966.jpg" alt="Robusta Natural Anaerobic" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">Robusta Natural Anaerobic</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$7.00 <span>/ Package</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 32 -->
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img src="https://bakseymarket.com/api/uploads/products/1774861101719-Render_Mockup_1600_1200_2025-11-11%20(7).jpg" alt="Banana powder" />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Coffee</div>
+              <div class="product-name">Banana powder (Bog Box)</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>0.0</strong> <span>(0)</span>
+              </div>
+              <div class="card-bottom">
+                <div class="price">$17.00 <span>/ Package</span></div>
+                <div class="card-icons">
+                  <i class="bi bi-eye" title="Quick View"></i>
+                  <i class="bi bi-cart3" title="Add to Cart"></i>
+                  <i class="bi bi-heart" title="Add to Wishlist"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+    <footer>
+      <div class="newsletter">
+        <div>
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>Get updates on new products and exclusive offers!</p>
+        </div>
+
+        <div class="subscribe">
+          <input placeholder="Enter your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+
+      <div class="footer-main">
+        <div class="footer-logo">
+          <img src="Logo.png" alt="Logo" />
+
+          <p>
+            Your one-stop destination for all your shopping needs. Quality
+            products from trusted vendors.
+          </p>
+
+          <div class="social">
+            <i class="bi bi-facebook"></i>
+            <i class="bi bi-twitter"></i>
+            <i class="bi bi-instagram"></i>
+            <i class="bi bi-youtube"></i>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+
+          <p>About Us</p>
+          <p>Contact Us</p>
+          <p>FAQ</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>My Account</h3>
+
+          <p>My Profile</p>
+          <p>Order History</p>
+          <p>Wishlist</p>
+        </div>
+
+        <div class="footer-col contact">
+          <h3>Contact Info</h3>
+
+          <p>
+            <i class="bi bi-geo-alt"></i>
+            #1891 Borey Atwood, Street 110E, Sangkat O'Bek Kaom, Khan Sen Sok,
+            Phnom Penh
+          </p>
+
+          <p>
+            <i class="bi bi-telephone"></i>
+            +855 85 20 75 42
+          </p>
+
+          <p>
+            <i class="bi bi-envelope"></i>
+            kimliheng95@gmai.com
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: false,
+        mirror: true,
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterItems = document.querySelectorAll(".filter-group .filter-item");
+        const sections = document.querySelectorAll(".product-grid > div[id]");
+
+        filterItems.forEach((item) => {
+          const link = item.querySelector("a");
+          if (!link) return;
+
+          link.addEventListener("click", function () {
+            const href = this.getAttribute("href");
+            if (href.startsWith("#")) {
+              filterItems.forEach((i) => i.classList.remove("active"));
+              item.classList.add("active");
+            }
+          });
+        });
+
+        window.addEventListener("scroll", function () {
+          let currentSectionId = "";
+          const scrollPosition = window.scrollY + 220;
+
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (scrollPosition >= sectionTop) {
+              currentSectionId = section.getAttribute("id");
+            }
+          });
+
+          if (currentSectionId) {
+            filterItems.forEach((item) => {
+              const link = item.querySelector("a");
+              if (link && link.getAttribute("href") === "#" + currentSectionId) {
+                filterItems.forEach((i) => i.classList.remove("active"));
+                item.classList.add("active");
+              }
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

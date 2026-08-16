@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LH Store - ម៉ូដបុរស</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@100..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Kantumruy Pro", sans-serif;
+      }
+
+      body {
+        background: #f7f8fa;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .sticky-header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      header {
+        height: 40px;
+        padding: 0 115px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        background: white;
+        color: #68758a;
+        font-size: 14px;
+      }
+
+      .lang-dropdown {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+
+      .lang-btn:hover {
+        background: #f0f0f0;
+      }
+
+      .lang-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        min-width: 120px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 6px;
+        display: none;
+        flex-direction: column;
+        z-index: 1001;
+        overflow: hidden;
+        border: 1px solid #eee;
+      }
+
+      .lang-dropdown:hover .lang-menu {
+        display: flex;
+      }
+
+      .lang-item {
+        padding: 8px 14px;
+        color: #333;
+        text-decoration: none;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.2s ease;
+      }
+
+      .lang-item:hover {
+        background: #fde8e8;
+        color: #d71920;
+      }
+
+      .section1 {
+        height: 80px;
+        padding: 0 115px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .logo img {
+        width: 80px;
+      }
+
+      .search {
+        display: flex;
+        width: 100%;
+        max-width: 680px;
+        height: 42px;
+        border: 1px solid #c2c2c2;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #f5f6fa;
+      }
+
+      .search input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0 18px;
+        background: transparent;
+      }
+
+      .search i {
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #d71920;
+        color: white;
+        cursor: pointer;
+      }
+
+      .right-s1 {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .icons {
+        display: flex;
+        gap: 20px;
+        font-size: 20px;
+      }
+
+      .money p:first-child {
+        font-size: 12px;
+        color: #777;
+      }
+
+      .money p:last-child {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      nav {
+        height: 45px;
+        background: #d71920;
+        padding: 0 115px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: white;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+      }
+
+      nav a.active {
+        background: white;
+        color: #d71920 !important;
+        font-weight: bold;
+      }
+
+      .category-banner {
+        background: #d71920;
+        color: white;
+        padding: 40px 115px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .category-icon {
+        width: 65px;
+        height: 65px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        flex-shrink: 0;
+      }
+
+      .category-title h1 {
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .category-title p {
+        font-size: 14px;
+        opacity: 0.9;
+        margin-top: 4px;
+      }
+
+      .container {
+        padding: 30px 115px;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 30px;
+      }
+
+      .filter-sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        position: sticky;
+        top: 185px;
+        height: fit-content;
+      }
+
+      .filter-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+      }
+
+      .filter-group {
+        margin-bottom: 25px;
+      }
+
+      .filter-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: #555;
+        font-size: 14px;
+        cursor: pointer;
+        margin-bottom: 4px;
+      }
+
+      .filter-item.active {
+        background: #fde8e8;
+        color: #d71920;
+        font-weight: bold;
+      }
+
+      .products-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .showing-text {
+        color: #666;
+        font-size: 15px;
+      }
+
+      .view-options {
+        display: flex;
+        gap: 8px;
+      }
+
+      .view-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .view-btn.active {
+        background: #d71920;
+        color: white;
+        border-color: #d71920;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .product-card {
+        background: rgb(227, 227, 227);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .product-card:hover {
+        transform: translateY(-6px) !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .product-img {
+        width: 100%;
+        height: 200px;
+        background: #f0f3f6;
+        overflow: hidden;
+      }
+
+      .product-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+
+      .product-card:hover .product-img img {
+        transform: scale(1.08);
+      }
+
+      .product-info {
+        padding: 12px;
+      }
+
+      .product-category {
+        font-size: 12px;
+        color: #888;
+      }
+
+      .product-name {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 4px;
+        color: #222;
+        line-height: 1.4;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: #e6a23c;
+        margin-top: 8px;
+      }
+
+      .rating span {
+        color: #888;
+      }
+
+      .price {
+        margin-top: 8px;
+        color: #d71920;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .price span {
+        color: #777;
+        font-size: 12px;
+        font-weight: normal;
+      }
+
+      .product-bottom-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+        gap: 8px;
+      }
+
+      .product-bottom-row .price {
+        margin-top: 0;
+      }
+
+      .product-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .action-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: white;
+        border: 1px solid #e2e2e2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      .action-btn:hover {
+        background: #d71920;
+        border-color: #d71920;
+        color: white;
+      }
+
+      footer {
+        background: #101827;
+        color: white;
+        margin-top: 50px;
+      }
+
+      .newsletter {
+        padding: 35px 115px;
+        border-bottom: 1px solid #293241;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .newsletter h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .newsletter p {
+        color: #b8c2d3;
+      }
+
+      .subscribe {
+        display: flex;
+        gap: 10px;
+      }
+
+      .subscribe input {
+        width: 350px;
+        height: 48px;
+        padding: 0 18px;
+        border-radius: 12px;
+        border: 1px solid #596273;
+        background: #273142;
+        color: white;
+        outline: none;
+      }
+
+      .subscribe button {
+        background: #ff7a00;
+        color: white;
+        border: none;
+        padding: 0 30px;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .footer-main {
+        padding: 55px 115px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+        gap: 50px;
+      }
+
+      .footer-logo img {
+        width: 200px;
+      }
+
+      .footer-logo p {
+        margin-top: 25px;
+        color: #b8c2d3;
+        line-height: 1.6;
+      }
+
+      .footer-col h3 {
+        margin-bottom: 25px;
+      }
+
+      .footer-col p {
+        color: #b8c2d3;
+        margin: 15px 0;
+        cursor: pointer;
+      }
+
+      .contact i {
+        color: #ff7a00;
+        margin-right: 12px;
+      }
+
+      .social {
+        display: flex;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .social i {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #273142;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      /* MEDIA QUERIES FOR RESPONSIVENESS */
+      @media (max-width: 1200px) {
+        header,
+        .section1,
+        nav,
+        .category-banner,
+        .container,
+        .newsletter,
+        .footer-main {
+          padding-left: 40px;
+          padding-right: 40px;
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          grid-template-columns: 1fr;
+          padding: 20px;
+        }
+
+        .filter-sidebar {
+          position: relative;
+          top: 0;
+        }
+
+        .newsletter,
+        .footer-main {
+          padding: 30px 20px;
+        }
+
+        .newsletter {
+          flex-direction: column;
+          gap: 20px;
+          align-items: flex-start;
+        }
+
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        header,
+        .section1,
+        nav,
+        .category-banner,
+        .container,
+        .newsletter,
+        .footer-main {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+
+        header {
+          font-size: 12px;
+        }
+
+        .section1 {
+          flex-direction: column;
+          height: auto;
+          padding-top: 15px;
+          padding-bottom: 15px;
+          gap: 15px;
+        }
+
+        .search {
+          width: 100%;
+        }
+
+        .right-s1 {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .subscribe {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .subscribe input {
+          width: 100%;
+        }
+
+        .subscribe button {
+          height: 48px;
+          width: 100%;
+        }
+
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .category-banner {
+          flex-direction: column;
+          text-align: center;
+          padding: 25px 15px;
+        }
+
+        .category-title h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sticky-header-wrapper">
+      <header>
+        <div>
+          <i class="bi bi-telephone"></i>
+          +855 99 456 459
+        </div>
+        <div class="lang-dropdown">
+          <div class="lang-btn">
+            <span>KH Khmer</span>
+            <i class="bi bi-chevron-down"></i>
+          </div>
+          <div class="lang-menu">
+            <a href="Fashion.html" class="lang-item">US English</a>
+            <a href="Fasion_kh.html" class="lang-item">KH Khmer</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="section1">
+        <div class="logo">
+          <img src="Logo.png" alt="Logo" />
+        </div>
+
+        <div class="search">
+          <input placeholder="ស្វែងរកទំនិញ..." />
+          <i class="bi bi-search"></i>
+        </div>
+
+        <div class="right-s1">
+          <div class="icons">
+            <i class="bi bi-heart"></i>
+            <i class="bi bi-person"></i>
+            <i class="bi bi-cart3"></i>
+          </div>
+          <div class="money">
+            <p>កន្ត្រកទំនិញ</p>
+            <p>$0.00</p>
+          </div>
+        </div>
+      </section>
+
+      <nav>
+        <a href="health_kh.html">សុខភាព និង សម្រស់</a>
+        <a href="Fasion_kh.html" class="active">ម៉ូដបុរស</a>
+        <a href="kitchen_kh.html">ផ្ទះ និង ម្ហូបអាហារ</a>
+        <a href="Food_drink_kh.html">ចំណីអាហារ និង ភេសជ្ជៈ</a>
+        <a href="contact_kh.html">ទំនាក់ទំនង</a>
+      </nav>
+    </div>
+
+    <div class="category-banner">
+      <div class="category-icon">
+        <i class="fa-solid fa-shirt"></i>
+      </div>
+      <div class="category-title">
+        <h1>ម៉ូដបុរស</h1>
+        <p>10 ផលិតផល</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <aside class="filter-sidebar" data-aos="zoom-in-up">
+        <div class="filter-title"><i class="bi bi-sliders"></i> តម្រៀបតាម</div>
+
+        <div class="filter-group">
+          <div class="filter-item active">
+            <a style="color: #d71920; text-decoration: none" href="">អាវ</a>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-item active">
+            <a style="color: #000000; text-decoration: none" href="index_kh.html"
+              >ត្រឡប់ទៅទំព័រដើម</a
+            >
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="products-header" data-aos="zoom-in-up">
+          <div class="showing-text">
+            កំពុងបង្ហាញ <strong>10</strong> នៃ <strong>10</strong> ផលិតផល
+          </div>
+          <div class="view-options">
+            <button class="view-btn active">
+              <i class="bi bi-grid-fill"></i>
+            </button>
+            <button class="view-btn"><i class="bi bi-list-ul"></i></button>
+          </div>
+        </div>
+
+        <div class="product-grid">
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775530308278-P-9.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">កងពលធំអន្តរាគមន៍លេខ៣ (ពណ៌លឿង)</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(1)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775530178978-P-8.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">កងពលធំអន្តរាគមន៍លេខ៣</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.8</strong> <span>(5)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775530042535-P-7.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">
+                ក្លឹបបាល់ទាត់ស្នងការដ្ឋាននគរបាលរាជធានីភ្នំពេញ (ពណ៌ស)
+              </div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.5</strong> <span>(3)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775529789755-P-6.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">
+                ក្លឹបបាល់ទាត់ស្នងការដ្ឋាននគរបាលរាជធានីភ្នំពេញ (ពណ៌ខ្មៅ)
+              </div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.9</strong> <span>(8)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775529471353-P-5.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">
+                អ៊ីស្ព័រ + ស្នងការដ្ឋាននគរបាលរាជធានីភ្នំពេញ (ពណ៌ខៀវ)
+              </div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.7</strong> <span>(6)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775529314659-p-4.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">
+                អ៊ីស្ព័រ + ស្នងការដ្ឋាននគរបាលរាជធានីភ្នំពេញ (ពណ៌ផ្ទៃមេឃ)
+              </div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.6</strong> <span>(4)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775528969807-P-3.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">
+                អ៊ីស្ព័រ + ស្នងការដ្ឋាននគរបាលរាជធានីភ្នំពេញ (ពណ៌ស)
+              </div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>4.4</strong> <span>(2)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775528764686-P-2.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">អ៊ីស្ព័រ + ក្រសួងមហាផ្ទៃ (ពណ៌លឿង)</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(10)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775528673629-P-1.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">អ៊ីស្ព័រ + ក្រសួងមហាផ្ទៃ (ពណ៌លឿង)</div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(10)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-aos="zoom-in-up">
+            <div class="product-img">
+              <img
+                src="https://bakseymarket.com/api/uploads/products/1775449231767-photo_2026-04-06_10-58-29.jpg"
+                alt="Product"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">អាវ</div>
+              <div class="product-name">
+                អ៊ីស្ព័រ + ក្រសួងមហាផ្ទៃ (ពណ៌ក្រហម)
+              </div>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <strong>5.0</strong> <span>(10)</span>
+              </div>
+              <div class="product-bottom-row">
+              <div class="price">$13.00 <span>/ កំប្លេ</span></div>
+              <div class="product-actions">
+                <div class="action-btn" title="មើលរហ័ស"><i class="bi bi-eye"></i></div>
+                <div class="action-btn" title="ដាក់ចូលកន្ត្រក"><i class="bi bi-cart3"></i></div>
+                <div class="action-btn" title="ចង់បាន"><i class="bi bi-heart"></i></div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer>
+      <div class="newsletter">
+        <div>
+          <h2>ជាវប្រចាំដើម្បីទទួលបានព័ត៌មានថ្មីៗ</h2>
+          <p>ទទួលបានព័ត៌មានអាប់ដេតលើផលិតផលថ្មីៗ និងការផ្តល់ជូនពិសេស!</p>
+        </div>
+
+        <div class="subscribe">
+          <input placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" />
+          <button>ជាវ</button>
+        </div>
+      </div>
+
+      <div class="footer-main">
+        <div class="footer-logo">
+          <img src="Logo.png" alt="Logo" />
+          <p>
+            ទីតាំងតែមួយគត់សម្រាប់រាល់តម្រូវការទិញទំនិញរបស់អ្នក។
+            ផលិតផលមានគុណភាពពីអ្នកផ្គត់ផ្គង់ដែលគួរឱ្យទុកចិត្ត។
+          </p>
+
+          <div class="social">
+            <i class="bi bi-facebook"></i>
+            <i class="bi bi-twitter"></i>
+            <i class="bi bi-instagram"></i>
+            <i class="bi bi-youtube"></i>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>តំណភ្ជាប់រហ័ស</h3>
+          <p>អំពីពួកយើង</p>
+          <p>ទំនាក់ទំនង</p>
+          <p>សំណួរញឹកញាប់</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>គណនីរបស់ខ្ញុំ</h3>
+          <p>ប្រវត្តិរូបរបស់ខ្ញុំ</p>
+          <p>ប្រវត្តិបញ្ជាទិញ</p>
+          <p>បញ្ជីចង់បាន</p>
+        </div>
+
+        <div class="footer-col contact">
+          <h3>ព័ត៌មានទំនាក់ទំនង</h3>
+          <p>
+            <i class="bi bi-geo-alt"></i>
+            #1891 បុរីអាតវូដ, ផ្លូវ 110E, សង្កាត់ទឹកថ្លា, ខណ្ឌសែនសុខ,
+            រាជធានីភ្នំពេញ
+          </p>
+          <p>
+            <i class="bi bi-telephone"></i>
+            +855 85 20 75 42
+          </p>
+          <p>
+            <i class="bi bi-envelope"></i>
+            kimliheng95@gmail.com
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: false,
+        mirror: true,
+      });
+    </script>
+  </body>
+</html>
